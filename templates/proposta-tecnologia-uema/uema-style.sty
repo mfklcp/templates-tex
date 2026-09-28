@@ -1,0 +1,42 @@
+\ProvidesPackage{uema-style}[2026/09/27 Estilo customizado por Marcio Franklin para UEMA]
+
+% No desenvolvimento de pacotes, usa-se \RequirePackage no lugar de \usepackage
+\RequirePackage{mathptmx}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{indentfirst}
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\RequirePackage{pdfpages}
+\RequirePackage{microtype}
+\RequirePackage[brazilian,hyperpageref]{backref}
+\RequirePackage[alf]{abntex2cite}
+
+% Garante que a configuração do PDF só rode após o hyperref estar 100% carregado
+\AtBeginDocument{
+    \pdfstringdefDisableCommands{\let\uppercase\relax}
+}
+
+% --- Configurações de aparência do PDF final ---
+\definecolor{blue}{RGB}{41,5,195}
+\makeatletter
+\hypersetup{
+    pdftitle={\@title},
+    pdfauthor={\@author},
+    pdfsubject={\imprimirpreambulo},
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black
+}
+\makeatother
+
+% --- Espaçamentos ---
+\setlength{\parindent}{2.0cm} 
+\setlength{\parskip}{0.0cm}
+\OnehalfSpacing 
+
+% Configuração das margens (UEMA: Superior 3cm, Esquerda 3cm, Inferior 2cm, Direita 2cm)
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout

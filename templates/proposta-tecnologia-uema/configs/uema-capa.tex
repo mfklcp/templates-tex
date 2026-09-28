@@ -1,0 +1,35 @@
+% --- Redefinição da Capa para Tamanho 12 e alinhamentos UEMA ---
+% --- Redefinição da Capa para Tamanho 12 e Título Centralizado Absoluto ---
+\renewcommand{\imprimircapa}{%
+  \begin{capa}%
+    \center
+    
+    % 1. Bloco superior com altura fixa (ex: 7cm) para englobar os autores
+    \begin{minipage}[t][7cm][t]{\textwidth}
+        \centering
+        \normalfont\normalsize
+        \imprimirinstituicao
+        
+        \vspace*{3\baselineskip}
+        \bfseries\normalsize
+        \imprimirautor
+    \end{minipage}
+    
+    % Mola de espaço flexível
+    \vspace*{\fill}
+    
+    % 2. Título (ficará travado no centro exato da folha)
+    \bfseries\normalsize\imprimirtitulo
+    
+    % Mola de espaço flexível
+    \vspace*{\fill}
+    
+    % 3. Bloco inferior com exatamente a mesma altura do bloco superior (7cm)
+    \begin{minipage}[b][7cm][b]{\textwidth}
+        \centering
+        \normalfont\normalsize
+        \imprimirlocal\par
+        \imprimirdata
+    \end{minipage}
+  \end{capa}
+}

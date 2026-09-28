@@ -1,0 +1,35 @@
+% --- Ajustes Finos do Sumário (Normas UEMA) ---
+
+% 1. Remove TODOS os espaçamentos verticais extras (espaço 1.5 uniforme)
+\setlength{\cftbeforechapterskip}{0pt}
+\renewcommand{\insertchapterspace}{}
+
+% 2. Deixa os pontinhos da linha mais juntos
+\renewcommand{\cftdotsep}{2}
+\renewcommand{\cftchapterdotsep}{2}
+\renewcommand{\cftsectiondotsep}{2}
+\renewcommand{\cftsubsectiondotsep}{2}
+\renewcommand{\cftsubsubsectiondotsep}{2}
+
+% 3. Alinha TODAS as seções e subseções rigorosamente à esquerda (margem 0)
+\setlength{\cftchapterindent}{0pt}
+\setlength{\cftsectionindent}{0pt}
+\setlength{\cftsubsectionindent}{0pt}
+\setlength{\cftsubsubsectionindent}{0pt}
+
+% 4. Distância entre o número e o texto
+\setlength{\cftchapternumwidth}{1.3cm}
+\setlength{\cftsectionnumwidth}{1.3cm}
+\setlength{\cftsubsectionnumwidth}{1.3cm}
+\setlength{\cftsubsubsectionnumwidth}{1.3cm}
+
+% 5. Força todas as subseções a ficarem em negrito
+\renewcommand{\cftsectionfont}{\bfseries}
+\renewcommand{\cftsubsectionfont}{\bfseries}
+\renewcommand{\cftsubsubsectionfont}{\bfseries}
+
+% 5. Números das páginas nunca em negrito
+\renewcommand{\cftchapterpagefont}{\normalfont}
+\renewcommand{\cftsectionpagefont}{\normalfont}
+\renewcommand{\cftsubsectionpagefont}{\normalfont}
+\renewcommand{\cftsubsubsectionpagefont}{\normalfont}

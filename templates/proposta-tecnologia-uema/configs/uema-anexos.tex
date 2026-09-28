@@ -1,0 +1,25 @@
+% --- Formatação de Anexos (Padrão UEMA) ---
+
+% 1. Altera as folhas de divisão para CAIXA ALTA
+\renewcommand{\anexosname}{\textbf{ANEXOS}}
+
+% 2. Remove o negrito dos títulos de cada Anexo individual
+\let\oldanexosenv\anexosenv
+\renewcommand{\anexosenv}{%
+    \oldanexosenv
+    % \normalfont remove o negrito; \raggedright trava na margem esquerda
+    \renewcommand{\ABNTEXchapterfont}{\normalfont}
+}
+
+% 3. Espaçamentos
+\makeatletter
+\renewcommand{\partanexos}{%
+  \cleardoublepage
+  \thispagestyle{empty}%
+  \vspace*{0.4\textheight}%
+  \begin{center}%
+    \bfseries\normalsize\anexosname%
+  \end{center}%
+  \newpage%
+}
+\makeatother

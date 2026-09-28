@@ -1,0 +1,42 @@
+% --- Configurações de Fonte ---
+\usepackage{mathptmx} % Aplica a fonte Times New Roman
+
+% --- Padronização de Títulos para Tamanho 12 e Fonte Times ---
+\renewcommand{\ABNTEXchapterfont}{\bfseries}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfont}{\bfseries}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfont}{\bfseries}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsubsectionfont}{\bfseries}
+\renewcommand{\ABNTEXsubsubsectionfontsize}{\normalsize}
+
+% --- Ajuste de Espaçamento entre Títulos e Texto ---
+\setlength{\afterchapskip}{1cm}  % Reduz o espaço logo abaixo dos títulos de capítulo
+\setlength{\beforechapskip}{0cm}   % Ajusta o topo do capítulo
+
+\setsecnumdepth{subsection}
+\setcounter{secnumdepth}{3}
+
+% Configuração das margens (UEMA: Superior 3cm, Esquerda 3cm, Inferior 2cm, Direita 2cm)
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+
+% --- Configuração de Listas (Padrão UEMA: Marcadores a, b, c e recuo de 2cm) ---
+\usepackage{enumitem}
+
+\setlist[enumerate,1]{
+    label=\alph*),          % Define o marcador como a), b), c)...
+    leftmargin=2.0cm,       % Aplica o recuo exato de 2cm na margem esquerda
+    labelwidth=0.6cm,       % Largura reservada para a letra e o parêntese
+    itemsep=0pt,            % Espaçamento entre os itens
+    topsep=0pt              % Espaçamento acima da lista
+}
+
+\setlist[itemize]{
+    leftmargin=2.0cm,       % Recuo de 2cm também para marcadores de lista com pontos
+    itemsep=0pt,
+    topsep=0pt
+}
+
