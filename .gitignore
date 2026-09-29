@@ -21,6 +21,7 @@
 *.synctex.gz
 *.synctex(busy)
 *.xdv
+*.brf
 
 # Indices, glossaries, and nomenclature
 
