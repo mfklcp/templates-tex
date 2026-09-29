@@ -1,0 +1,36 @@
+% --- Redefinição da Folha de Rosto para Tamanho 12 e Espaçamentos Exatos ---
+\makeatletter
+\renewcommand{\folhaderostocontent}{
+  \begin{center}
+    % 1. Autores (Na margem superior)
+    \bfseries\normalsize\imprimirautor
+    
+    % 2. Título (Intervalo de 4 quebras de linha / cai na 5ª linha)
+    \vspace*{4\baselineskip}
+    \bfseries\normalsize\imprimirtitulo
+  \end{center}
+  
+  % 3. Preâmbulo / Resuminho (Intervalo de 2 quebras de linha)
+  \vspace*{2\baselineskip}
+  
+  % Anula o parágrafo e alinha a caixa perfeitamente à direita
+  \noindent\hfill
+  \begin{minipage}{0.5\textwidth}
+      \normalfont\normalsize\SingleSpacing % Espaço simples
+      \imprimirpreambulo
+      \par\vspace*{\baselineskip} % 1 linha de espaço antes do orientador
+      
+      % Orientador sem negrito
+      \imprimirorientadorRotulo~\imprimirorientador
+  \end{minipage}
+  
+  % 4. Local e Data 
+  \vspace*{\fill}
+  
+  \begin{center}
+    \normalfont\normalsize
+    \imprimirlocal\par
+    \imprimirdata
+  \end{center}
+}
+\makeatother

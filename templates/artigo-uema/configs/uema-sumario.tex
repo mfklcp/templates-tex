@@ -1,0 +1,147 @@
+% =========================================================
+% --- Ajustes Finos do Sumário (Normas UEMA) ---
+% Reproduz fielmente o modelo (modelos-uema/sumario-modelo.pdf):
+%  - Entradas (número + título) em negrito, tamanho 12 (Times)
+%  - Número na margem esquerda e título afastado 1.3cm
+%  - Espaçamento 1.5 (≈20,7pt) uniforme entre TODAS as linhas
+%  - Números de página SEM negrito
+%  - REFERÊNCIAS em caixa alta, recuada; APÊNDICE/ANEXO recuados com traço "–"
+% =========================================================
+
+% --- 0. Espaçamento vertical: exatamente 20,7pt entre as entradas (como no modelo) ---
+% O modelo tem exatamente 20,7pt (= \baselineskip de 12pt com espaçamento 1.5)
+% entre TODAS as linhas, inclusive antes de REFERÊNCIAS/APÊNDICES/ANEXOS.
+\setlength{\cftbeforechapterskip}{0pt}
+\setlength{\cftbeforesectionskip}{0pt}
+\setlength{\cftbeforesubsectionskip}{0pt}
+\setlength{\cftbeforesubsubsectionskip}{0pt}
+\setlength{\cftbeforeparagraphskip}{0pt}
+\setlength{\cftbeforesubparagraphskip}{0pt}
+\setlength{\cftbeforepartskip}{0pt}
+\setlength{\cftbeforebookskip}{0pt}
+\renewcommand{\insertchapterspace}{}
+\setlength{\cftparskip}{0pt}
+% Garante \baselineskip = 20,7pt dentro do sumário
+\AtBeginDocument{\addtocontents{toc}{\protect\setlength{\protect\baselineskip}{20.7pt}}}
+% Espaço entre o título "SUMÁRIO" e a primeira entrada (~41,4pt no modelo)
+\makeatletter
+\renewcommand{\aftertoctitle}{\par\nobreak\vskip 20.9pt}%
+\makeatother
+
+% --- 1. Pontos de preenchimento (espaçamento fino, como no modelo) ---
+\renewcommand{\cftdotsep}{2}
+\renewcommand{\cftchapterdotsep}{2}
+\renewcommand{\cftsectiondotsep}{2}
+\renewcommand{\cftsubsectiondotsep}{2}
+% Os PONTOS de preenchimento NÃO são negritos (o título continua negrito).
+% O padrão do memoir aplica \bfseries no leader; removemos isso.
+\renewcommand{\cftchapterleader}{\cftdotfill{\cftchapterdotsep}}
+\renewcommand{\cftsectionleader}{\cftdotfill{\cftsectiondotsep}}
+\renewcommand{\cftsubsectionleader}{\cftdotfill{\cftsubsectiondotsep}}
+
+% --- 2. Indentação: número na margem (x=85pt) e título afastado 1.3cm (x=121pt) ---
+% O abntex2 (modo ABNT 6027:2012) seta cada \cftXnnumwidth a partir de
+% \cftlastnumwidth. Definimos por último, de forma direta e via \AtBeginDocument,
+% para vencer qualquer reconfiguração posterior da classe.
+\makeatletter
+\setlength{\cftlastnumwidth}{1.3cm}
+\AtBeginDocument{%
+  \setlength{\cftlastnumwidth}{1.3cm}%
+  \setlength{\cftchapternumwidth}{1.3cm}%
+  \setlength{\cftsectionnumwidth}{1.3cm}%
+  \setlength{\cftsubsectionnumwidth}{1.3cm}%
+  \setlength{\cftsubsubsectionnumwidth}{1.3cm}%
+}
+\makeatother
+
+\setlength{\cftchapterindent}{0pt}
+\setlength{\cftsectionindent}{0pt}
+\setlength{\cftsubsectionindent}{0pt}
+
+% --- 3. Títulos (número + texto) em negrito, como no modelo ---
+\renewcommand{\cftchapterfont}{\bfseries}
+\renewcommand{\cftsectionfont}{\bfseries}
+\renewcommand{\cftsubsectionfont}{\bfseries}
+\renewcommand{\cftsubsubsectionfont}{\bfseries}
+
+% --- 4. Números de página SEM negrito (no modelo são normais) ---
+\renewcommand{\cftchapterpagefont}{\normalfont}
+\renewcommand{\cftsectionpagefont}{\normalfont}
+\renewcommand{\cftsubsectionpagefont}{\normalfont}
+\renewcommand{\cftsubsubsectionpagefont}{\normalfont}
+
+% =========================================================
+% --- 5. Apêndices/Anexos: traço curto "–" entre número e título ---
+% \ifuemasumarioapendice é ligado apenas dentro de \l@appendix, de modo que o
+% traço apareça só em "APÊNDICE A – TÍTULO" / "ANEXO A – TÍTULO", com pouco
+% espaçamento ao redor do hífen (como no modelo).
+% =========================================================
+\makeatletter
+\newif\ifuemasumarioapendice
+\renewcommand{\cftchapteraftersnum}{%
+  \ifuemasumarioapendice\space--\space\fi
+}%
+% Para apêndices/anexos a caixa do número não deve ter \hfil (senão o título
+% fica empurrado para longe do "–"). Usamos uma caixa natural.
+\let\uemaoldchapternumberlinebox\chapternumberlinebox
+\def\chapternumberlinebox#1#2{%
+  \ifuemasumarioapendice
+    {\hb@xt@#1{#2}}%
+  \else
+    \uemaoldchapternumberlinebox{#1}{#2}%
+  \fi
+}
+\let\uemaoldlappendix\l@appendix
+\renewcommand{\l@appendix}[2]{%
+  \uemasumarioapendicetrue
+  \uemaoldlappendix{#1}{#2}%
+  \uemasumarioapendicefalse
+}%
+\makeatother
+
+% =========================================================
+% --- 6. Recuos e CAIXA ALTA de REFERÊNCIAS, APÊNDICES e ANEXOS ---
+% No modelo, essas entradas ficam recuadas ~1.3cm, alinhadas ao título (x=121pt),
+% e "REFERÊNCIAS" aparece em caixa alta.
+% =========================================================
+
+% 6a. Recuo de 1.3cm à esquerda de REFERÊNCIAS, APÊNDICES e ANEXOS.
+%     Não usamos \cftsetindents global (é persistente e afetaria os capítulos).
+%     Para REFERÊNCIAS ligamos um flag enquanto sua \contentsline é processada;
+%     para APÊNDICES/ANEXOS o recuo é fixo dentro do próprio \l@appendix.
+\makeatletter
+\newif\ifuemaindentref
+% Reindenta \l@chapter apenas quando o flag de referências está ativo
+\let\uemaoldlchapter\l@chapter
+\renewcommand{\l@chapter}[2]{%
+  \begingroup
+    \ifuemaindentref\setlength{\cftchapterindent}{1.3cm}\fi
+    \uemaoldlchapter{#1}{#2}%
+  \endgroup
+  \global\uemaindentreffalse
+}
+% Reindenta \l@appendix (apêndices e anexos)
+\let\uemaoldlappendixindent\l@appendix
+\renewcommand{\l@appendix}[2]{%
+  \begingroup
+    \setlength{\cftchapterindent}{1.3cm}%
+    \uemaoldlappendixindent{#1}{#2}%
+  \endgroup
+}
+\makeatother
+
+% 6b. REFERÊNCIAS: título em CAIXA ALTA e marcador de recuo no sumário.
+\makeatletter
+\renewcommand{\bibname}{REFERÊNCIAS}%
+\renewcommand{\bibsection}{%
+  \chapter*{\bibname}%
+  \bibmark
+  \ifnobibintoc\else
+    \phantomsection
+    \addtocontents{toc}{\protect\uemaindentreftrue}%
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bibname}}{\bibname}}%
+    \addtocontents{toc}{\protect\uemaindentreffalse}%
+  \fi
+  \prebibhook
+}
+\makeatother

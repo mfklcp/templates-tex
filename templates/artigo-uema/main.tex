@@ -1,0 +1,66 @@
+\documentclass[
+    12pt, 
+    openright, 
+    oneside, 
+    a4paper, 
+    chapter=TITLE, % --- Força título em caixa alta
+    sumario=tradicional, % --- espaçamento padrão UEMA
+    english, 
+    brazil 
+]{abntex2}
+
+\usepackage{configs/uema-style}
+
+% --- Importa metadados do documento ---
+\input{info_documento}
+
+% --- Configurações UEMA ---
+\input{configs/uema-fonts}
+\input{configs/uema-lists}
+\input{configs/uema-capa}
+\input{configs/uema-folhaderosto}
+\input{configs/uema-sumario}
+\input{configs/uema-apendices}
+\input{configs/uema-anexos}
+
+\begin{document}
+\selectlanguage{brazil}
+\frenchspacing
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+\imprimircapa
+\imprimirfolhaderosto
+
+\includepdf[pages=-]{pdfs/ficha_catalografica.pdf}
+
+\include{pre-textuais/folha_aprovacao}
+\include{pre-textuais/resumo}
+\include{pre-textuais/abstract}
+
+% --- Sumário ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+\include{textuais/01-introducao}
+\include{textuais/02-desenvolvimento}
+\include{textuais/03-consideracoes_finais}
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+\bibliography{bib/referencias}
+
+\include{pos-textuais/apendices}
+\include{pos-textuais/anexos}
+
+\end{document}

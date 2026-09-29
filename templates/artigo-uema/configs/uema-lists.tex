@@ -1,0 +1,19 @@
+% --- Configuração Definitiva de Alíneas (Padrão UEMA) ---
+\usepackage{enumitem}
+
+\newlist{uemaenum}{enumerate}{1}
+\setlist[uemaenum,1]{
+    label=\alph*),
+    leftmargin=2.75cm,
+    labelsep=0.4cm,
+    itemsep=2pt,
+    topsep=2pt
+}
+
+% Para listas com marcadores (pontos), se precisar:
+\newlist{uemaball}{itemize}{1}
+\setlist[uemaball,1]{
+    leftmargin=2.75cm,
+    itemsep=2pt,
+    topsep=2pt
+}

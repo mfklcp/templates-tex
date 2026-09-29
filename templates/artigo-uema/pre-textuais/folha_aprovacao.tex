@@ -1,0 +1,48 @@
+\begin{folhadeaprovacao}
+  % 1. Autor e Título na margem superior
+  \begin{center}
+    \bfseries\normalsize\imprimirautor\par
+    \vspace*{2\baselineskip}
+    \bfseries\normalsize\imprimirtitulo
+  \end{center}
+  
+  \vspace*{\fill}
+  
+  % 2. Preâmbulo começando exatamente no eixo vertical da página
+  \noindent\hfill
+  \begin{minipage}{0.5\textwidth}
+      \normalfont\normalsize\SingleSpacing
+      \imprimirpreambulo
+  \end{minipage}
+  
+  \vspace*{\fill}
+  
+  % 3. Data de aprovação alinhada à esquerda
+  \noindent\normalfont\normalsize Aprovada em \_\_\_/\_\_\_/\_\_\_\_\_\_
+  
+  \vspace*{2\baselineskip}
+  
+  % 4. Título da Banca (centralizado)
+  \begin{center}
+    BANCA EXAMINADORA
+  \end{center}
+  
+  % 5. Assinaturas
+  \assinatura{
+    \imprimirorientador\ (Orientador) \\ 
+    Titulação em xxxxxxxxxxx \\ 
+    Instituição da Titulação
+  }
+  
+  \assinatura{
+    Prof. Titulação Nome do examinador (Examinador 1) \\ 
+    Titulação em xxxxxxxxxxx \\ 
+    Instituição da Titulação
+  }
+  
+  \assinatura{
+    Prof. Titulação Nome do examinador (Examinador 2) \\ 
+    Titulação em xxxxxxxxxxx \\ 
+    Instituição da Titulação
+  }
+\end{folhadeaprovacao}

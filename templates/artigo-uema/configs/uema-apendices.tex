@@ -1,0 +1,27 @@
+% =========================================================
+% --- Formatação de Apêndices e Anexos (Padrão UEMA) ---
+% =========================================================
+
+% 1. Altera as folhas de divisão para CAIXA ALTA
+\renewcommand{\apendicesname}{\textbf{APÊNDICES}}
+
+% 2. Remove o negrito dos títulos de cada Apêndice individual
+\let\oldapendicesenv\apendicesenv
+\renewcommand{\apendicesenv}{%
+    \oldapendicesenv
+    % \normalfont remove o negrito; \raggedright trava na margem esquerda
+    \renewcommand{\ABNTEXchapterfont}{\normalfont}
+}
+
+% 3. Espaçamentos
+\makeatletter
+\renewcommand{\partapendices}{%
+  \cleardoublepage
+  \thispagestyle{empty}%
+  \vspace*{0.4\textheight}% Puxa exatamente para o meio vertical da página
+  \begin{center}%
+    \bfseries\normalsize\apendicesname%
+  \end{center}%
+  \newpage%
+}
+\makeatother
