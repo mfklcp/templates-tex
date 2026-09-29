@@ -1,0 +1,41 @@
+# LaTeX auxiliary and log files
+
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.xdv
+
+# Indices, glossaries, and nomenclature
+
+*.idx
+*.ilg
+*.ind
+*.nlo
+*.nls
+
+# Generated PDF output (uncomment if you prefer not to track compiled PDFs in git)
+
+*.pdf
+
+# IDE and OS-specific hidden files
+
+.vscode/
+.DS_Store
+Thumbs.db
