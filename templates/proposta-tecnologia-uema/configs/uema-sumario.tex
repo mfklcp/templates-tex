@@ -33,6 +33,11 @@
 \renewcommand{\cftchapterdotsep}{2}
 \renewcommand{\cftsectiondotsep}{2}
 \renewcommand{\cftsubsectiondotsep}{2}
+% Os PONTOS de preenchimento NÃO são negritos (o título continua negrito).
+% O padrão do memoir aplica \bfseries no leader; removemos isso.
+\renewcommand{\cftchapterleader}{\cftdotfill{\cftchapterdotsep}}
+\renewcommand{\cftsectionleader}{\cftdotfill{\cftsectiondotsep}}
+\renewcommand{\cftsubsectionleader}{\cftdotfill{\cftsubsectiondotsep}}
 
 % --- 2. Indentação: número na margem (x=85pt) e título afastado 1.3cm (x=121pt) ---
 % O abntex2 (modo ABNT 6027:2012) seta cada \cftXnnumwidth a partir de
@@ -74,8 +79,18 @@
 \makeatletter
 \newif\ifuemasumarioapendice
 \renewcommand{\cftchapteraftersnum}{%
-  \ifuemasumarioapendice\,--\,\fi
+  \ifuemasumarioapendice\space--\space\fi
 }%
+% Para apêndices/anexos a caixa do número não deve ter \hfil (senão o título
+% fica empurrado para longe do "–"). Usamos uma caixa natural.
+\let\uemaoldchapternumberlinebox\chapternumberlinebox
+\def\chapternumberlinebox#1#2{%
+  \ifuemasumarioapendice
+    {\hb@xt@#1{#2}}%
+  \else
+    \uemaoldchapternumberlinebox{#1}{#2}%
+  \fi
+}
 \let\uemaoldlappendix\l@appendix
 \renewcommand{\l@appendix}[2]{%
   \uemasumarioapendicetrue
